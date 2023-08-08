@@ -1,4 +1,4 @@
-package com.example
+package com.student.management
 
 import io.micronaut.runtime.EmbeddedApplication
 import io.micronaut.test.extensions.spock.annotation.MicronautTest
