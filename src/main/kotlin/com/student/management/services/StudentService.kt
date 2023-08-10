@@ -17,12 +17,11 @@ class StudentService(private val databaseManager: DatabaseManager) {
         val connection: Connection = databaseManager.getConnection()
 
         return try {
-            val insertQuery = "INSERT INTO students (studentID, FirstName, LastName) VALUES (?, ?, ?)"
+            val insertQuery = "INSERT INTO students (FirstName, LastName) VALUES (?, ?)"
             val preparedStatement: PreparedStatement = connection.prepareStatement(insertQuery)
 
-            preparedStatement.setInt(1, studentRequest.id)
-            preparedStatement.setString(2, studentRequest.firstName)
-            preparedStatement.setString(3, studentRequest.lastName)
+            preparedStatement.setString(1, studentRequest.firstName)
+            preparedStatement.setString(2, studentRequest.lastName)
 
             preparedStatement.executeUpdate()
 
@@ -136,6 +135,29 @@ class StudentService(private val databaseManager: DatabaseManager) {
         } catch (e: Exception) {
             e.printStackTrace()
             "Error clearing student data."
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun deleteStudent(studentId: Int): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val deleteQuery = "DELETE FROM students WHERE studentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
+            preparedStatement.setInt(1, studentId)
+
+            val rowsDeleted = preparedStatement.executeUpdate()
+
+            if (rowsDeleted > 0) {
+                "Student with ID $studentId deleted successfully."
+            } else {
+                "Student with ID $studentId not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error deleting student."
         } finally {
             connection.close()
         }
