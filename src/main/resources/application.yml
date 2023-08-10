@@ -1,10 +1,6 @@
 micronaut:
   application:
     name: demo
-#  scan:
-#    packages:
-#      - com.example.services
-#      - com.example.controllers
   server:
     cors:
       enabled: true
@@ -26,19 +22,6 @@ micronaut:
             - Origin
             - Cache-Control
             - Content-Type
-#  endpoints:
-#    all:
-#      enabled: true
-#
-#endpoints:
-#  flyway:
-#    enabled: true
-#    sensitive: false
-#
-#flyway:
-#  datasource:
-#    default:
-#      locations: classpath:db/migration
 
 netty:
   default:
@@ -56,3 +39,13 @@ jackson:
     FAIL_ON_EMPTY_BEANS: true
   deserialization:
     FAIL_ON_UNKNOWN_PROPERTIES: true
+
+#endpoints:
+#  flyway:
+#    enabled: true
+#    sensitive: false
+#
+#flyway:
+#  datasource:
+#    default:
+#      locations: classpath:db/migration

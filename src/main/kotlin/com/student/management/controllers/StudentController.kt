@@ -1,12 +1,6 @@
 package com.student.management.controllers
 
-import com.zaxxer.hikari.HikariConfig
-import com.zaxxer.hikari.HikariDataSource
 import io.micronaut.http.MediaType
-import java.sql.Connection
-import java.sql.PreparedStatement
-import java.sql.ResultSet
-import com.fasterxml.jackson.databind.ObjectMapper
 import com.student.management.models.StudentRequest
 import com.student.management.services.StudentService
 import io.micronaut.context.annotation.Context

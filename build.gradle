@@ -27,7 +27,7 @@ dependencies {
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
     runtimeOnly("org.postgresql:postgresql:42.6.0")
-//    runtimeOnly("io.micronaut.sql:micronaut-jdbc-hikari")
+    testImplementation("org.spockframework:spock-core:2.0-M4-groovy-3.0")
 }
 
 application {
