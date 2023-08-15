@@ -23,4 +23,9 @@ class ScheduleController(private val scheduleService: ScheduleService) {
     fun clearAllData(): String {
         return scheduleService.clearAllData()
     }
+
+    @Delete("/deleteGivenStudentId/{studentID}")
+    fun deleteGivenStudentId(@PathVariable studentID: Int): String {
+        return scheduleService.deleteGivenStudentId(studentID)
+    }
 }

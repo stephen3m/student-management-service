@@ -21,6 +21,11 @@ class StudentController(private val studentService: StudentService) {
         return studentService.readData()
     }
 
+    @Get("/getName/{studentID}")
+    fun getStudentName(@PathVariable studentID: Int): String {
+        return studentService.getStudentName(studentID)
+    }
+
     @Patch("/changeFirstName/{studentId}")
     fun updateFirstName(
         @PathVariable studentId: Int,

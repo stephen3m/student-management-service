@@ -10,6 +10,7 @@ import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import com.student.management.services.ScheduleService
+import java.sql.Timestamp
 
 @Context
 class StudentService(private val databaseManager: DatabaseManager, private val scheduleService: ScheduleService) {
@@ -66,6 +67,30 @@ class StudentService(private val databaseManager: DatabaseManager, private val s
         }
 
         return results
+    }
+
+    fun getStudentName(studentId: Int): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val query = "SELECT FirstName, LastName FROM students WHERE studentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(query)
+            preparedStatement.setInt(1, studentId)
+            val resultSet: ResultSet = preparedStatement.executeQuery()
+
+            if (resultSet.next()) {
+                val firstName = resultSet.getString("FirstName")
+                val lastName = resultSet.getString("LastName")
+                "$firstName $lastName"
+            } else {
+                "Student with ID $studentId not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error fetching student name."
+        } finally {
+            connection.close()
+        }
     }
 
     fun updateFirstName(

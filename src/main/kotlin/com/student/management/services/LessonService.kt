@@ -74,6 +74,50 @@ class LessonService(private val databaseManager: DatabaseManager, private val sc
         return results
     }
 
+    fun getLessonDateAndTime(lessonID: Int): Timestamp? {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val query = "SELECT dateAndTime FROM lessons WHERE lessonID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(query)
+            preparedStatement.setInt(1, lessonID)
+
+            val resultSet: ResultSet = preparedStatement.executeQuery()
+            if (resultSet.next()) {
+                resultSet.getTimestamp("dateAndTime")
+            } else {
+                null // Lesson not found
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun getLessonDuration(lessonID: Int): Int? {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val query = "SELECT duration FROM lessons WHERE lessonID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(query)
+            preparedStatement.setInt(1, lessonID)
+
+            val resultSet: ResultSet = preparedStatement.executeQuery()
+            if (resultSet.next()) {
+                resultSet.getInt("duration")
+            } else {
+                null
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            null
+        } finally {
+            connection.close()
+        }
+    }
+
     fun updateDateAndTime(
         @PathVariable lessonID: Int,
         @Body updateRequest: LessonRequest

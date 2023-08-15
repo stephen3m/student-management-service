@@ -7,6 +7,7 @@ import io.micronaut.context.annotation.Context
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
 import io.micronaut.http.annotation.*
+import java.sql.Timestamp
 
 @Context
 @Controller("/lessons")
@@ -19,6 +20,16 @@ class LessonController(private val lessonService: LessonService) {
     @Get
     fun readData(): List<Map<String, Any>> {
         return lessonService.readData()
+    }
+
+    @Get("/duration/{lessonID}")
+    fun getLessonDuration(@PathVariable lessonID: Int): Int? {
+        return lessonService.getLessonDuration(lessonID)
+    }
+
+    @Get("/dateAndTime/{lessonID}")
+    fun getLessonDateAndTime(@PathVariable lessonID: Int): Timestamp? {
+        return lessonService.getLessonDateAndTime(lessonID)
     }
 
     @Patch("/changeDateAndTime/{lessonID}")
