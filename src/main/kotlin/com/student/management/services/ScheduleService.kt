@@ -64,5 +64,68 @@ class ScheduleService(private val databaseManager: DatabaseManager) {
 
         return results
     }
+
+    fun clearAllData(): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val deleteQuery = "DELETE FROM schedule"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
+            preparedStatement.executeUpdate()
+
+            "All schedule data cleared."
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error clearing schedule data."
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun deleteGivenLessonId(lessonID: Int): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val deleteQuery = "DELETE FROM schedule WHERE lessonID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
+            preparedStatement.setInt(1, lessonID)
+
+            val rowsDeleted = preparedStatement.executeUpdate()
+
+            if (rowsDeleted > 0) {
+                "Entry/Entries with lesson ID $lessonID deleted successfully."
+            } else {
+                "Entry/Entries with lesson ID $lessonID not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error deleting entry/entries."
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun deleteGivenStudentId(studentID: Int): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val deleteQuery = "DELETE FROM schedule WHERE studentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
+            preparedStatement.setInt(1, studentID)
+
+            val rowsDeleted = preparedStatement.executeUpdate()
+
+            if (rowsDeleted > 0) {
+                "Entry/Entries with student ID $studentID deleted successfully."
+            } else {
+                "Entry/Entries with student ID $studentID not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error deleting entry/entries."
+        } finally {
+            connection.close()
+        }
+    }
 }
 

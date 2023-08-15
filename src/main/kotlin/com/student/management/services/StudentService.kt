@@ -9,9 +9,10 @@ import io.micronaut.http.annotation.PathVariable
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
+import com.student.management.services.ScheduleService
 
 @Context
-class StudentService(private val databaseManager: DatabaseManager) {
+class StudentService(private val databaseManager: DatabaseManager, private val scheduleService: ScheduleService) {
     private val objectMapper: ObjectMapper = ObjectMapper()
     fun addStudent(studentRequest: StudentRequest): String {
         val connection: Connection = databaseManager.getConnection()
@@ -144,6 +145,7 @@ class StudentService(private val databaseManager: DatabaseManager) {
         val connection: Connection = databaseManager.getConnection()
 
         return try {
+            scheduleService.deleteGivenStudentId(studentId)
             val deleteQuery = "DELETE FROM students WHERE studentID = ?"
             val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
             preparedStatement.setInt(1, studentId)

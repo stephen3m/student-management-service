@@ -18,4 +18,9 @@ class ScheduleController(private val scheduleService: ScheduleService) {
     fun readData(): List<Map<String, Any>> {
         return scheduleService.readData()
     }
+
+    @Delete
+    fun clearAllData(): String {
+        return scheduleService.clearAllData()
+    }
 }

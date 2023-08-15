@@ -12,7 +12,7 @@ import io.micronaut.http.annotation.*
 @Controller("/lessons")
 class LessonController(private val lessonService: LessonService) {
     @Post(consumes = [MediaType.APPLICATION_JSON], produces = [MediaType.APPLICATION_JSON])
-    fun addLesson(@Body lessonRequest: LessonRequest): String {
+    fun addLesson(@Body lessonRequest: LessonRequest): LessonService.LessonData {
         return lessonService.addLesson(lessonRequest)
     }
 

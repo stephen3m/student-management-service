@@ -9,28 +9,35 @@ import io.micronaut.http.annotation.PathVariable
 import java.sql.Connection
 import java.sql.PreparedStatement
 import java.sql.ResultSet
+import java.sql.Timestamp
 
 @Context
-class LessonService(private val databaseManager: DatabaseManager) {
+class LessonService(private val databaseManager: DatabaseManager, private val scheduleService: ScheduleService) {
     private val objectMapper: ObjectMapper = ObjectMapper()
-    fun addLesson(lessonRequest: LessonRequest): String {
+    data class LessonData(
+        val lessonID: Int,
+        val dateAndTime: Timestamp,
+        val duration: Int
+    )
+
+    fun addLesson(lessonRequest: LessonRequest): LessonData {
         val connection: Connection = databaseManager.getConnection()
 
         return try {
-            val insertQuery = "INSERT INTO lessons (DateAndTime, Duration) VALUES (?, ?)"
+            val insertQuery = "INSERT INTO lessons (DateAndTime, Duration) VALUES (?, ?) RETURNING LessonID"
             val preparedStatement: PreparedStatement = connection.prepareStatement(insertQuery)
 
             preparedStatement.setTimestamp(1, lessonRequest.dateAndTime)
             preparedStatement.setInt(2, lessonRequest.duration)
 
-            preparedStatement.executeUpdate()
+            val resultSet = preparedStatement.executeQuery()
+            resultSet.next()
+            val lessonID = resultSet.getInt("LessonID")
 
-            val responseMessage = "Lesson data added successfully."
-            objectMapper.writeValueAsString(mapOf("message" to responseMessage))
+            LessonData(lessonID, lessonRequest.dateAndTime, lessonRequest.duration)
         } catch (e: Exception) {
             e.printStackTrace()
-            val errorMessage = "Error adding lesson data."
-            objectMapper.writeValueAsString(mapOf("error" to errorMessage))
+            throw LessonServiceException("Error adding lesson data.", e)
         } finally {
             connection.close()
         }
@@ -144,6 +151,7 @@ class LessonService(private val databaseManager: DatabaseManager) {
         val connection: Connection = databaseManager.getConnection()
 
         return try {
+            scheduleService.deleteGivenLessonId(lessonID)
             val deleteQuery = "DELETE FROM lessons WHERE lessonID = ?"
             val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
             preparedStatement.setInt(1, lessonID)
