@@ -43,6 +43,30 @@ class StudentController(private val studentService: StudentService, private val 
         return studentService.updateLastName(studentId, updateRequest)
     }
 
+    @Patch("/changeAge/{studentId}")
+    fun updateAge(
+        @PathVariable studentId: Int,
+        @Body updateRequest: StudentRequest
+    ): String {
+        return studentService.updateAge(studentId, updateRequest)
+    }
+
+    @Patch("/changePhoneNumber/{studentId}")
+    fun updatePhoneNumber(
+        @PathVariable studentId: Int,
+        @Body updateRequest: StudentRequest
+    ): String {
+        return studentService.updatePhoneNumber(studentId, updateRequest)
+    }
+
+    @Patch("/changeInstrument/{studentId}")
+    fun updateInstrument(
+        @PathVariable studentId: Int,
+        @Body updateRequest: StudentRequest
+    ): String {
+        return studentService.updateInstrument(studentId, updateRequest)
+    }
+
     @Delete
     fun clearAllData(): String {
         return studentService.clearAllData()

@@ -17,11 +17,14 @@ class StudentService(private val databaseManager: DatabaseManager, private val s
         val connection: Connection = databaseManager.getConnection()
 
         return try {
-            val insertQuery = "INSERT INTO students (FirstName, LastName) VALUES (?, ?)"
+            val insertQuery = "INSERT INTO students (FirstName, LastName, Age, PhoneNumber, Instrument) VALUES (?, ?, ?, ?, ?)"
             val preparedStatement: PreparedStatement = connection.prepareStatement(insertQuery)
 
             preparedStatement.setString(1, studentRequest.firstName)
             preparedStatement.setString(2, studentRequest.lastName)
+            preparedStatement.setInt(3, studentRequest.age)
+            preparedStatement.setString(4, studentRequest.phoneNumber)
+            preparedStatement.setString(5, studentRequest.instrument)
 
             preparedStatement.executeUpdate()
 
@@ -49,11 +52,17 @@ class StudentService(private val databaseManager: DatabaseManager, private val s
                 val id = resultSet.getInt("studentID")
                 val lastName = resultSet.getString("LastName")
                 val firstName = resultSet.getString("FirstName")
+                val age = resultSet.getInt("Age")
+                val phoneNumber = resultSet.getString("PhoneNumber")
+                val instrument = resultSet.getString("Instrument")
 
                 val resultMap = mapOf(
                     "id" to id,
                     "lastName" to lastName,
-                    "firstName" to firstName
+                    "firstName" to firstName,
+                    "age" to age,
+                    "phoneNumber" to phoneNumber,
+                    "instrument" to instrument
                 )
 
                 results.add(resultMap)
@@ -147,10 +156,96 @@ class StudentService(private val databaseManager: DatabaseManager, private val s
         }
     }
 
+    fun updateAge(
+        @PathVariable studentId: Int,
+        @Body updateRequest: StudentRequest
+    ): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val updateQuery = "UPDATE students SET Age = ? WHERE StudentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(updateQuery)
+
+            preparedStatement.setInt(1, updateRequest.age)
+            preparedStatement.setInt(2, studentId)
+
+            val rowsUpdated = preparedStatement.executeUpdate()
+
+            if (rowsUpdated > 0) {
+                "Age updated successfully."
+            } else {
+                "Student with ID $studentId not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error updating age."
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun updatePhoneNumber(
+        @PathVariable studentId: Int,
+        @Body updateRequest: StudentRequest
+    ): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val updateQuery = "UPDATE students SET PhoneNumber = ? WHERE StudentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(updateQuery)
+
+            preparedStatement.setString(1, updateRequest.phoneNumber)
+            preparedStatement.setInt(2, studentId)
+
+            val rowsUpdated = preparedStatement.executeUpdate()
+
+            if (rowsUpdated > 0) {
+                "Phone number updated successfully."
+            } else {
+                "Student with ID $studentId not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error updating phone number."
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun updateInstrument(
+        @PathVariable studentId: Int,
+        @Body updateRequest: StudentRequest
+    ): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val updateQuery = "UPDATE students SET Instrument = ? WHERE StudentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(updateQuery)
+
+            preparedStatement.setString(1, updateRequest.instrument)
+            preparedStatement.setInt(2, studentId)
+
+            val rowsUpdated = preparedStatement.executeUpdate()
+
+            if (rowsUpdated > 0) {
+                "Instrument updated successfully."
+            } else {
+                "Student with ID $studentId not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error updating instrument."
+        } finally {
+            connection.close()
+        }
+    }
+
     fun clearAllData(): String {
         val connection: Connection = databaseManager.getConnection()
 
         return try {
+            scheduleService.clearAllData()
+            paymentService.deleteAllPayments()
             val deleteQuery = "DELETE FROM students"
             val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
             preparedStatement.executeUpdate()
