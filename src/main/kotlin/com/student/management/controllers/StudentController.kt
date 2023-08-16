@@ -3,6 +3,7 @@ package com.student.management.controllers
 import io.micronaut.http.MediaType
 import com.student.management.models.StudentRequest
 import com.student.management.services.StudentService
+import com.student.management.services.PaymentService
 import io.micronaut.context.annotation.Context
 import io.micronaut.http.HttpResponse
 import io.micronaut.http.HttpStatus
@@ -10,7 +11,7 @@ import io.micronaut.http.annotation.*
 
 @Context
 @Controller("/students")
-class StudentController(private val studentService: StudentService) {
+class StudentController(private val studentService: StudentService, private val paymentService: StudentService) {
     @Post(consumes = [MediaType.APPLICATION_JSON], produces = [MediaType.APPLICATION_JSON])
     fun addStudent(@Body studentRequest: StudentRequest): String {
         return studentService.addStudent(studentRequest)

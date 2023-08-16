@@ -17,21 +17,19 @@ class PaymentService(private val databaseManager: DatabaseManager, private val s
     data class PaymentData(
         val paymentId: Int,
         val paymentDate: Timestamp,
-        val studentName: String,
-        val paymentDollarAmount: Int,
-        val paymentCentAmount: Int
+        val studentID: Int,
+        val paymentAmount: Float
     )
     fun addPayment(paymentRequest: PaymentRequest): String {
         val connection: Connection = databaseManager.getConnection()
 
         return try {
-            val insertQuery = "INSERT INTO payments (PaymentDate, StudentName, PaymentDollarAmount, PaymentCentAmount) VALUES (?, ?, ?, ?)"
+            val insertQuery = "INSERT INTO payments (PaymentDate, StudentID, PaymentAmount) VALUES (?, ?, ?)"
             val preparedStatement: PreparedStatement = connection.prepareStatement(insertQuery)
 
             preparedStatement.setTimestamp(1, paymentRequest.paymentDate)
-            preparedStatement.setString(2, paymentRequest.studentName)
-            preparedStatement.setInt(3, paymentRequest.paymentDollarAmount)
-            preparedStatement.setInt(4, paymentRequest.paymentCentAmount)
+            preparedStatement.setInt(2, paymentRequest.studentID)
+            preparedStatement.setFloat(3, paymentRequest.paymentAmount)
 
             preparedStatement.executeUpdate()
 
@@ -56,16 +54,14 @@ class PaymentService(private val databaseManager: DatabaseManager, private val s
             while (resultSet.next()) {
                 val paymentId = resultSet.getInt("id")
                 val paymentDate = resultSet.getTimestamp("paymentDate")
-                val studentName = resultSet.getString("studentName")
-                val paymentDollarAmount = resultSet.getInt("paymentDollarAmount")
-                val paymentCentAmount = resultSet.getInt("paymentCentAmount")
+                val studentID = resultSet.getInt("studentID")
+                val paymentAmount = resultSet.getFloat("paymentAmount")
 
                 val paymentData = PaymentData(
                     paymentId,
                     paymentDate,
-                    studentName,
-                    paymentDollarAmount,
-                    paymentCentAmount
+                    studentID,
+                    paymentAmount
                 )
 
                 payments.add(paymentData)
@@ -115,6 +111,29 @@ class PaymentService(private val databaseManager: DatabaseManager, private val s
         } catch (e: Exception) {
             e.printStackTrace()
             "Error deleting payment."
+        } finally {
+            connection.close()
+        }
+    }
+
+    fun deleteGivenStudentId(studentID: Int): String {
+        val connection: Connection = databaseManager.getConnection()
+
+        return try {
+            val deleteQuery = "DELETE FROM payments WHERE studentID = ?"
+            val preparedStatement: PreparedStatement = connection.prepareStatement(deleteQuery)
+            preparedStatement.setInt(1, studentID)
+
+            val rowsDeleted = preparedStatement.executeUpdate()
+
+            if (rowsDeleted > 0) {
+                "Entry/Entries with student ID $studentID deleted successfully."
+            } else {
+                "Entry/Entries with student ID $studentID not found."
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            "Error deleting entry/entries."
         } finally {
             connection.close()
         }

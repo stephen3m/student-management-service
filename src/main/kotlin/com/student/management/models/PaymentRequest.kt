@@ -4,7 +4,6 @@ import java.sql.Timestamp
 
 data class PaymentRequest(
     val paymentDate: Timestamp,
-    val studentName: String,
-    val paymentDollarAmount: Int,
-    val paymentCentAmount: Int
+    val studentID: Int,
+    val paymentAmount: Float
 )
