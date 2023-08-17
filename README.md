@@ -1,16 +1,71 @@
-## Micronaut 3.9.1 Documentation
+# Student Management System - Backend
 
-- [User Guide](https://docs.micronaut.io/3.9.1/guide/index.html)
-- [API Reference](https://docs.micronaut.io/3.9.1/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/3.9.1/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+This repository contains the backend code for an interactive web application designed to manage student records, lesson scheduling, and payment tracking.
 
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-## Feature http-client documentation
+## Table of Contents
 
-- [Micronaut HTTP Client documentation](https://docs.micronaut.io/latest/guide/index.html#httpClient)
+- [Project Overview](#project-overview)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
+- [Project Structure](#project-structure)
 
+## Project Overview
+
+The Student Management System backend is responsible for handling data management, processing user requests, and interfacing with the database. It provides essential functionalities for creating, updating, and retrieving student information, lesson schedules, and payment details.
+
+## Installation
+
+Follow these steps to set up and run the backend of the Student Management System:
+
+1. Clone this repository to your local machine:
+
+```
+git clone git@github.com:stephen3m/student-management-service.git
+```
+
+2. Navigate to the project directory:
+
+```
+cd student-management-service
+```
+
+4. Backend setup:
+Before proceeding with the backend setup, ensure you have Docker Compose installed on your machine. If not, you can download and install it from the official Docker website: [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
+
+Once Docker Compose is installed, you can set up the PostgreSQL database using the provided `docker-compose.dev.yml` file. In the terminal, run:
+```
+docker-compose -f docker-compose.dev.yml up -d
+```
+This command will start a PostgreSQL container with the specified configuration and environment variables. The database will be accessible on port 5432, and you can connect to it using the provided credentials: 
+- Username: `demo`
+- Password: `password`
+- Database: `demo`
+
+6. Frontend setup:
+Refer to https://github.com/stephen3m/student-management-ui for instructions.
+
+## Usage
+
+The Student Management System backend provides the following main features:
+
+* Handling requests for student information
+* Managing lesson schedules and details
+* Tracking payment information and history
+
+## Technologies Used
+
+* Micronaut: A modern, JVM-based, full-stack framework for building modular and maintainable microservices.
+* PostgreSQL: A powerful, open-source relational database management system.
+
+## Project Structure
+
+The project directory is organized as follows:
+
+* /src: Contains the source code of the backend application
+  * /controllers: Includes Micronaut controllers for handling incoming HTTP requests
+  * /services: Contains business logic and service layers
+  * /models: Defines data models and request/response structures
+  * /databases: Manages database connections and interactions
+* /build: Contains build artifacts and compiled code
 
