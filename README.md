@@ -30,7 +30,7 @@ git clone git@github.com:stephen3m/student-management-service.git
 cd student-management-service
 ```
 
-4. Backend setup:
+3. Backend setup:
 Before proceeding with the backend setup, ensure you have Docker Compose installed on your machine. If not, you can download and install it from the official Docker website: [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
 
 Once Docker Compose is installed, you can set up the PostgreSQL database using the provided `docker-compose.dev.yml` file. In the terminal, run:
@@ -42,7 +42,7 @@ This command will start a PostgreSQL container with the specified configuration 
 - Password: `password`
 - Database: `demo`
 
-6. Frontend setup:
+4. Frontend setup:
 Refer to https://github.com/stephen3m/student-management-ui for instructions.
 
 ## Usage
