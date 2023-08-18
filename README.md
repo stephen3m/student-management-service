@@ -31,16 +31,36 @@ cd student-management-service
 ```
 
 3. Backend setup:
-Before proceeding with the backend setup, ensure you have Docker Compose installed on your machine. If not, you can download and install it from the official Docker website: [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
-
-Once Docker Compose is installed, you can set up the PostgreSQL database using the provided `docker-compose.dev.yml` file. In the terminal, run:
-```
-docker-compose -f docker-compose.dev.yml up -d
-```
-This command will start a PostgreSQL container with the specified configuration and environment variables. The database will be accessible on port 5432, and you can connect to it using the provided credentials: 
-- Username: `demo`
-- Password: `password`
-- Database: `demo`
+* Set up PostgreSQL database
+  * Install Docker Compose. You can install it from the official Docker website: [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
+  * Once Docker Compose is installed, you can set up the PostgreSQL database using the provided `docker-compose.dev.yml` file. In the terminal, run:
+    ```
+    docker-compose -f docker-compose.dev.yml up -d
+    ```
+    This command will start a PostgreSQL container with the specified configuration and environment variables. The database will be accessible on 
+    port 5432, and you can connect to it using the provided credentials:   
+    - Username: `demo`
+    - Password: `password`
+    - Database: `demo`
+  * To manage and interact with the PostgreSQL database, follow these steps:
+    1. Install DBeaver
+    2. Open DBeaver: Launch DBeaver on your machine.
+    3. Connect to Database by creating a new database connection using the following settings:
+       Host: localhost
+       Port: 5432
+       Database: demo
+       Username: demo
+       Password: password
+    4. Open SQL Editor: After successfully connecting, open an SQL editor within DBeaver.
+    5. Run SQL Queries: Open the file sqlQueries.sql located in the folder src/main/resources/databases of this repository. Run the SQL queries in 
+       the file to set up the necessary tables and schema for your application.
+* Run Micronaut Application
+  * To run the Application.kt file on your preferred IDE, follow these steps:
+    1. Install Micronaut
+    2. Open the project in your preferred IDE
+    3. Locate the Application.kt file and run it using your IDE's run/debug configuration.
+       
+You've now successfully set up the backend environment, created the necessary database tables, and ran the Micronaut application.
 
 4. Frontend setup:
 Refer to https://github.com/stephen3m/student-management-ui for instructions.
