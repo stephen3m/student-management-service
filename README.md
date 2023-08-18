@@ -33,6 +33,7 @@ cd student-management-service
 
 3. Backend setup:
 * Set up PostgreSQL database
+  * Install PostgreSQL
   * Install Docker Compose. You can install it from the official Docker website: [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
   * Once Docker Compose is installed, you can set up the PostgreSQL database using the provided `docker-compose.dev.yml` file. In the terminal, run:
     ```
