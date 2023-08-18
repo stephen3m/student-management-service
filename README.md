@@ -57,6 +57,8 @@ The Student Management System backend provides the following main features:
 
 * Micronaut: A modern, JVM-based, full-stack framework for building modular and maintainable microservices.
 * PostgreSQL: A powerful, open-source relational database management system.
+* DBeaver: A versatile and user-friendly database management tool, used for designing, managing, and querying databases.
+* Insomnia: A comprehensive API testing tool that enables efficient testing, debugging, and documentation of APIs.
 
 ## Project Structure
 
