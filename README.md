@@ -8,6 +8,7 @@ This repository contains the backend code for an interactive web application des
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
+- [Architecture Diagram](#architecture-diagram)
 - [Project Structure](#project-structure)
 
 ## Project Overview
@@ -62,8 +63,7 @@ cd student-management-service
        
 You've now successfully set up the backend environment, created the necessary database tables, and ran the Micronaut application.
 
-4. Frontend setup:
-Refer to https://github.com/stephen3m/student-management-ui for instructions.
+For setting up the frontend part of this project, refer to https://github.com/stephen3m/student-management-ui for instructions.
 
 ## Usage
 
@@ -79,6 +79,9 @@ The Student Management System backend provides the following main features:
 * PostgreSQL: A powerful, open-source relational database management system.
 * DBeaver: A versatile and user-friendly database management tool, used for designing, managing, and querying databases.
 * Insomnia: A comprehensive API testing tool that enables efficient testing, debugging, and documentation of APIs.
+
+## Architecture Diagram
+![UML class](https://github.com/stephen3m/student-management-service/assets/96703864/1883db62-2a7c-4567-9890-312268a5703c)
 
 ## Project Structure
 
