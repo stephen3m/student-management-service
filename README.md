@@ -81,7 +81,7 @@ The Student Management System backend provides the following main features:
 * Insomnia: A comprehensive API testing tool that enables efficient testing, debugging, and documentation of APIs.
 
 ## Architecture Diagram
-![UML class](https://github.com/stephen3m/student-management-service/assets/96703864/1883db62-2a7c-4567-9890-312268a5703c)
+![SMS (1)](https://github.com/stephen3m/student-management-service/assets/96703864/4990057d-963f-4e09-a985-bfc67e114b63)
 
 ## Project Structure
 
