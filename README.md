@@ -70,9 +70,8 @@ For setting up the frontend part of this project, refer to https://github.com/st
 
 The Student Management System backend provides the following main features:
 
-* Handling requests for student information
-* Managing lesson schedules and details
-* Tracking payment information and history
+* Handling API requests such as Get, Post, Delete, and Patch for student, lesson, and payment information
+* Initializing a data source using Hikari library
 
 ## Technologies Used
 
