@@ -1,3 +1,5 @@
+CREATE DATABASE demo;
+
 CREATE TABLE students (
     studentID SERIAL primary key,
     lastName varchar(255),
