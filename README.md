@@ -48,13 +48,15 @@ cd student-management-service
     1. Install DBeaver
     2. Open DBeaver: Launch DBeaver on your machine.
     3. Connect to Database by creating a new database connection using the following settings:
+       ```
        Host: localhost
        Port: 5432
        Database: demo
        Username: demo
        Password: password
-    4. Open SQL Editor: After successfully connecting, open an SQL editor within DBeaver.
-    5. Run SQL Queries: Open the file sqlQueries.sql located in the folder src/main/resources/databases of this repository. Run the SQL queries in 
+       ```
+    5. Open SQL Editor: After successfully connecting, open an SQL editor within DBeaver.
+    6. Run SQL Queries: Open the file sqlQueries.sql located in the folder src/main/resources/databases of this repository. Run the SQL queries in 
        the file to set up the necessary tables and schema for your application.
 * Run Micronaut Application
   * To run the Application.kt file on your preferred IDE, follow these steps:
