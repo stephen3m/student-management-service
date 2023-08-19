@@ -5,7 +5,7 @@ This repository contains the backend code for an interactive web application des
 ## Table of Contents
 
 - [Project Overview](#project-overview)
-- [Installation](#installation)
+- [Setup](#setup)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 - [Architecture Diagram](#architecture-diagram)
@@ -15,7 +15,7 @@ This repository contains the backend code for an interactive web application des
 
 The Student Management System backend is responsible for handling data management, processing user requests, and interfacing with the database. It provides essential functionalities for creating, updating, and retrieving student information, lesson schedules, and payment details.
 
-## Installation
+## Setup
 
 Follow these steps to set up and run the backend of the Student Management System:
 
@@ -36,6 +36,7 @@ cd student-management-service
   * Install PostgreSQL
   * Install Docker Compose. You can install it from the official Docker website: [Docker Compose Installation Guide](https://docs.docker.com/compose/install/)
   * Once Docker Compose is installed, you can set up the PostgreSQL database using the provided `docker-compose.dev.yml` file. In the terminal, run:
+
     ```
     docker-compose -f docker-compose.dev.yml up -d
     ```
