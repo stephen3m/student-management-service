@@ -7,7 +7,7 @@ This repository contains the backend code for an interactive web application des
 - [Project Overview](#project-overview)
 - [Setup](#setup)
 - [Usage](#usage)
-- [Technologies Used](#technologies-used)
+- [Technologies and Languages Used](#technologies-and-languages-used)
 - [Architecture Diagram](#architecture-diagram)
 - [Project Structure](#project-structure)
 
@@ -76,9 +76,9 @@ The Student Management System backend provides the following main features:
 * Handling API requests such as Get, Post, Delete, and Patch for student, lesson, and payment information
 * Initializing a data source using Hikari library
 
-## Technologies Used
+## Technologies and Languages Used
 
-* Micronaut: A modern, JVM-based, full-stack framework for building modular and maintainable microservices.
+* Micronaut (application written in Kotlin): A modern, JVM-based, full-stack framework for building modular and maintainable microservices.
 * PostgreSQL: A powerful, open-source relational database management system.
 * DBeaver: A versatile and user-friendly database management tool, used for designing, managing, and querying databases.
 * Insomnia: A comprehensive API testing tool that enables efficient testing, debugging, and documentation of APIs.
