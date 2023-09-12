@@ -1,6 +1,6 @@
 # Student Management System - Backend
 
-This repository contains the backend code for an interactive web application designed to manage student records, lesson scheduling, and payment tracking.
+This repository contains the backend code for an interactive web application designed to manage music student records, lesson scheduling, and payment tracking.
 
 ## Table of Contents
 
